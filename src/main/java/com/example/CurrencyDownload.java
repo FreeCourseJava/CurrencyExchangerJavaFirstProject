@@ -1,3 +1,5 @@
+package com.example;
+//COntroller for downloading rates of currency
 import org.springframework.stereotype.Controller;
 
 @Controller

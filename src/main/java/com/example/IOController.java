@@ -1,4 +1,4 @@
-package Exchanger;
+package com.example;
 //Controller foe input and output
 import org.springframework.stereotype.Controller;
 

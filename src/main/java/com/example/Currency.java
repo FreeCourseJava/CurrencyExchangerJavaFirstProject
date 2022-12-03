@@ -1,4 +1,4 @@
-package Exchanger;
+package com.example;
 
 public class Currency {
     private String currencyAbbreviation;
