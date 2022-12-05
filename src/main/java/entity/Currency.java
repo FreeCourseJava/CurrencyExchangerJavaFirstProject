@@ -1,11 +1,13 @@
-package com.example;
+package entity;
 
 public class Currency {
     private String currencyAbbreviation;
     private String name;
-    private long currencyRate;
+    private float currencyRate;
 
-    public Currency(String currencyAbbreviation, String name, long currencyRate) {
+    private int currencyDenomination;
+
+    public Currency(String currencyAbbreviation, String name, float currencyRate) {
         this.currencyAbbreviation = currencyAbbreviation;
         this.name = name;
         this.currencyRate = currencyRate;
@@ -27,11 +29,17 @@ public class Currency {
         this.name = name;
     }
 
-    public long getCurrencyRate() {
+    public float getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(long currencyRate) {
-        this.currencyRate = currencyRate;
+    public void setCurrencyRate(float currencyRate) {
+        this.currencyRate = currencyRate;}
+
+    public int getCurrencyDenomination() {
+        return currencyDenomination; }
+
+    public void setCurrencyDenomination(int currencyDenomination) {
+        this.currencyDenomination = currencyDenomination;
     }
 }

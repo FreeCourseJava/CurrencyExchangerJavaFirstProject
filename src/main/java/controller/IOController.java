@@ -1,5 +1,5 @@
-package com.example;
-//Controller foe input and output
+package controller;
+//Controller for input and output to Web
 import org.springframework.stereotype.Controller;
 
 @Controller
