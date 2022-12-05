@@ -1,9 +1,9 @@
 package com.example.entity;
 
-public class Currency {
+public class Currency{
     private String currencyAbbreviation;
     private String name;
-    private float currencyRate;
+    private float currencyRate ;
 
     private int currencyDenomination;
 
