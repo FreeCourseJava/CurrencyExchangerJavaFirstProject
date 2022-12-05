@@ -1,4 +1,4 @@
-package entity;
+package com.example.entity;
 
 public class Currency {
     private String currencyAbbreviation;
@@ -7,10 +7,11 @@ public class Currency {
 
     private int currencyDenomination;
 
-    public Currency(String currencyAbbreviation, String name, float currencyRate) {
+    public Currency(String currencyAbbreviation, String name, float currencyRate, int currencyDenomination) {
         this.currencyAbbreviation = currencyAbbreviation;
         this.name = name;
         this.currencyRate = currencyRate;
+        this.currencyDenomination = currencyDenomination;
     }
 
     public String getCurrencyAbbreviation() {
