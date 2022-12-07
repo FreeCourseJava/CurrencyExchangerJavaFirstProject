@@ -1,9 +1,9 @@
 package com.example.entity;
 
-public class Currency{
+public class Currency {
     private String currencyAbbreviation;
     private String name;
-    private float currencyRate ;
+    private float currencyRate;
 
     private int currencyDenomination;
 
@@ -35,10 +35,12 @@ public class Currency{
     }
 
     public void setCurrencyRate(float currencyRate) {
-        this.currencyRate = currencyRate;}
+        this.currencyRate = currencyRate;
+    }
 
     public int getCurrencyDenomination() {
-        return currencyDenomination; }
+        return currencyDenomination;
+    }
 
     public void setCurrencyDenomination(int currencyDenomination) {
         this.currencyDenomination = currencyDenomination;
