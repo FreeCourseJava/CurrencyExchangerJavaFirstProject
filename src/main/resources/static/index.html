@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<head>
+    <title>
+        Currency Exchanger
+    </title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+     function onClick(){
+     request = "";
+     axios.post("http://localhost:8080/",request).then( function (repost){
+        for  (i=0;i<repost.data.length;i++){
+        document.writeln(JSON.stringify(repost.data[i]));}
+        });
+      }
+    </script>
+
+</head>
+
+<body>
+
+<h2 align="center">Для запроса курса валют нажмите кнопку</h2>
+
+<button onclick="onClick()">Запросить курс</button>
+
+</body>
