@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.entity.Currency;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GetCurrenciesImpl implements GetCurrencies {
 
     private final CurrencyList currencyList;
