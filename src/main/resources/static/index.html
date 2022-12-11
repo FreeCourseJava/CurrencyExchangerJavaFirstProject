@@ -1,24 +1,78 @@
 <!DOCTYPE html>
 
 <head>
-	<title>
-		Currency Exchanger
-	</title>
+    <title>
+        Currency Exchanger
+    </title>
 
-	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-	<script>
+    <style>
+   div {
+  text-align: center;
+}
+    </style>
+
+    <script>
         function onClick() {
             request = "";
             axios.post("http://localhost:8080/", request).then(function (repost) {
-                for (i = 0; i < repost.data.length; i++) {
-                    document.writeln(JSON.stringify(repost.data[i]));
-                }
+
+            var table = document.createElement('table');
+            table.border = 1;
+            table.align="center";
+            var tr = document.createElement('tr');
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+            var td3 = document.createElement('td');
+            var td4 = document.createElement('td');
+
+            var text1 = document.createTextNode("Валюта");
+            var text2 = document.createTextNode("Буквенный код");
+            var text3 = document.createTextNode("Курс");
+            var text4 = document.createTextNode("Единиц");
+
+            td1.appendChild(text1);
+            td2.appendChild(text2);
+            td3.appendChild(text3);
+            td4.appendChild(text4);
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            tr.appendChild(td4);
+            table.appendChild(tr);
+
+            for (var i = 0; i < repost.data.length; i++) {
+               var tr = document.createElement('tr');
+               var td1 = document.createElement('td');
+               var td2 = document.createElement('td');
+               var td3 = document.createElement('td');
+               var td4 = document.createElement('td');
+
+               var text1 = document.createTextNode(repost.data[i].name);
+               var text2 = document.createTextNode(repost.data[i].currencyAbbreviation);
+               var text3 = document.createTextNode(repost.data[i].currencyRate);
+               var text4 = document.createTextNode(repost.data[i].currencyDenomination);
+
+               td1.appendChild(text1);
+               td2.appendChild(text2);
+               td3.appendChild(text3);
+               td4.appendChild(text4);
+
+               tr.appendChild(td1);
+               tr.appendChild(td2);
+               tr.appendChild(td3);
+               tr.appendChild(td4);
+               table.appendChild(tr);
+            }
+            document.body.appendChild(table);
             });
         }
-	</script>
+
+    </script>
 
 </head>
 
@@ -26,6 +80,9 @@
 
 <h2 align="center">Для запроса курса валют нажмите кнопку</h2>
 
-<button onclick="onClick()">Запросить курс</button>
+<div>
+    <button onclick="onClick()">Запросить курс</button>
+</div>
+
 
 </body>
