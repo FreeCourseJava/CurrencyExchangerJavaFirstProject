@@ -1,9 +1,9 @@
 package com.example.service;
 
-import java.util.List;
-
 import com.example.entity.Currency;
 
-public interface CurrencyList {
+import java.util.List;
+
+public interface CurrencyFromWWW {
     List<Currency> getCurrencyRates();
 }

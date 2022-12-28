@@ -1,9 +1,8 @@
 package com.example.service;
 
-import java.util.List;
-
 import com.example.entity.Currency;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 public interface GetCurrencies {
