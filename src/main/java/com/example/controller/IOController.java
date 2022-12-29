@@ -12,4 +12,10 @@ public class IOController {
     public String getIndex() {
         return "index.html";
     }
+
+    @GetMapping("/converter")
+    public String getConverter() {
+        return "converter.html";
+    }
+
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Конвертер валют</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+var currencies = new Object();
+
+function onLoad() {
+  getCurrencies();
+}
+
+function getCurrencies() {
+  request = '';
+  axios.post('http://localhost:8080/', request).then(function (repost) {
+    for (var i = 0; i < repost.data.length; i++) {
+      currencies[repost.data[i].currencyAbbreviation] = {
+        rate: repost.data[i].currencyRate,
+        name: repost.data[i].name,
+      };
+    }
+    updateLists();
+  });
+}
+
+function updateLists() {
+  console.log(JSON.stringify(currencies));
+  var list = document.getElementById('currencies');
+
+  for (var abbrev in currencies) {
+    console.log(abbrev, currencies[abbrev].name);
+    var option = document.createElement('option');
+    option.value = currencies[abbrev].name;
+    option.id = abbrev;
+    list.appendChild(option);
+  }
+}
+
+function convert() {
+  var currencyFrom = document.getElementById("currencyFrom");
+  alert ( currencyFrom.value );
+  alert ( currencyFrom.getAttribute('id'));
+  alert(currencies['USD'].rate);
+}
+
+
+    </script>
+</head>
+<body onload="onLoad();">
+
+
+<datalist id="currencies">
+</datalist>
+
+<div> Из валюты </div>
+<input list="currencies" id="currencyFrom"/>
+<div> В валюту </div>
+<input list="currencies" id="currencyTo"/>
+<div> Сумма </div>
+<input id="sum"/>
+<div>
+    <button onclick="convert();">Сконвертировать</button>
+</div>
+
+
+
+
+</body>
+</html>
