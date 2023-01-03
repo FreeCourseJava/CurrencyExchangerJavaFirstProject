@@ -11,7 +11,11 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
+  <style>
+    .form-control {
+      height: 30px;
+    }
+  </style>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
@@ -41,13 +45,7 @@
 
       for (var abbrev in currencies) {
         console.log(abbrev, currencies[abbrev].name);
-        var option = document.createElement('option');
-        option.value = currencies[abbrev].name;
-        option.id = abbrev;
-        list.appendChild(option);
-        
-
-        data.push({id: abbrev, text: currencies[abbrev].name})
+        data.push({ id: abbrev, text: currencies[abbrev].name })
 
 
         $(".drop-down-select2").select2({
@@ -71,33 +69,37 @@
 
 <body onload="onLoad();">
 
-  <div class="container-fluid">
-    <div class="jumbotron">
-      <datalist id="currencies">
-        <option id="test"> asasdsad </option>
-      </datalist>
+  <div class="container-fluid ">
+    <div class="jumbotron ">
+      <div class="d-flex">
+        <div class="form-group ">
+          <div class="input-group">
+            <input type="text" class="form-control inout-currency" id="sum1" placeholder="Sum to convert" value="0">
+            <select class="drop-down-select2 form-control" name="state" id="currencyFrom">
+            </select>
 
-      <div> Из валюты </div>
-      <select class="drop-down-select2" name="state" id="currencyFrom">
+            <input type="text" class="form-control inout-currency" id="sum2" placeholder="Sum to convert" value="0">
+            <select class="drop-down-select2 form-control" name="state" id="currencyTo">
+            </select>
+          </div>
 
-      </select>
-      <div> В валюту </div>
-      <select class="drop-down-select2" name="state" id="currencyTo">
 
-      </select>
-      <div> Сумма </div>
-      <input id="sum" />
-      <div>
+
+
+
+          <!--div>
         <button onclick="convert();" class="btn btn-primary btn-lg">Сконвертировать</button>
+      </div-->
+
+
+
+        </div>
+
       </div>
-
-
-
 
 
     </div>
   </div>
-
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -111,10 +113,11 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('.drop-down-select2').select2();
+      $('.drop-down-select2').select2({ height: '30px' });
     });
-
-
+    $(".inout-currency").keyup(function () {
+      alert("Handler for .keyup() called.");
+    });
 
 
 
