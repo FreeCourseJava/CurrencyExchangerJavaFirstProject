@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Конвертер валют</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <style>
+    .form-control {
+      height: 30px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h1> Сконвертировать </h1>
+      <div class="d-flex">
+        <div class="form-group ">
+          <div class="input-group">
+            <input type="text" class="form-control input-currency" id="sum1" placeholder="Sum to convert" value="0">
+            <select class="form-control select-currency" name="state" id="currency1">
+            </select>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+              class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z">
+              </path>
+            </svg>
+            <input type="text" class="form-control input-currency" id="sum2" placeholder="Sum to convert" value="0">
+            <select class="form-control select-currency" name="state" id="currency2">
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <script>
+    var currencies = [];
+    currencies['RUR'] = { rate: 1, name: 'Российский рубль', denomination: 1 };
+    var data = [];
+
+    function getCurrencies() {
+      request = '';
+      axios.post('http://localhost:8080/', request).then(function (repost) {
+        for (var i = 0; i < repost.data.length; i++) {
+          currencies[repost.data[i].currencyAbbreviation] = {
+            rate: repost.data[i].currencyRate,
+            name: repost.data[i].name,
+            denomination: repost.data[i].currencyDenomination
+          };
+        }
+        updateLists();
+      });
+    }
+
+    function updateLists() {
+      var list = document.getElementById('currencies');
+
+      for (var abbrev in currencies) {
+        data.push({ id: abbrev, text: currencies[abbrev].name })
+
+        $(".select-currency").select2({
+          data: data
+        })
+      }
+    }
+
+    function convert(from) {
+      var from_currency;
+      var to_currency;
+
+      if (from == '1') {
+        from_currency = '1';
+        to_currency = '2';
+
+      }
+      else if (from == '2') {
+        from_currency = '2';
+        to_currency = '1';
+      }
+
+      var from_currency_abbrev = $('#currency' + from_currency).find(':selected').val();
+      var to_currency_abbrev = $('#currency' + to_currency).find(':selected').val();
+      var sum_to_convert = $('#sum' + from_currency).val();
+
+      sum_in_rur = sum_to_convert / currencies[from_currency_abbrev].denomination * currencies[from_currency_abbrev].rate;
+      result = sum_in_rur * currencies[to_currency_abbrev].denomination / currencies[to_currency_abbrev].rate;
+
+      $('#sum' + to_currency).val(result);
+    }
+
+    $(document).ready(function () {
+      $('.select-currency').select2({ height: '30px' });
+      getCurrencies();
+    });
+
+    $(".input-currency").keyup(function (event) {
+
+      var from;
+      if (event.target.id == 'sum1') {
+        from = 1;
+      }
+      else if (event.target.id == 'sum2') {
+        from = 2;
+      }
+
+      convert(from);
+    });
+
+    $(".select-currency").change(function (event) {
+      var from;
+      if (event.target.id == 'currency1') {
+        from = 1;
+      }
+      else if (event.target.id == 'currency2') {
+        from = 2;
+      }
+
+      convert(from);
+    });
+
+  </script>
+</body>
+
+</html>
