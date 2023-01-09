@@ -1,15 +1,5 @@
 package com.example.service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import com.example.entity.Currency;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -20,9 +10,18 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 @Service
-public class CbrCurrencyList implements CurrencyList {
+public class CbrCurrencyList implements CurrencyFromWWW {
 
     private final NumberFormat format;
     private final DocumentBuilder db;

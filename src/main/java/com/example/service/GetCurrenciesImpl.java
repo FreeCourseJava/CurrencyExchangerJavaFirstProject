@@ -1,20 +1,19 @@
 package com.example.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.example.entity.Currency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GetCurrenciesImpl implements GetCurrencies {
 
-    private final CurrencyList currencyList;
+    private final CurrencyFromRepository currencyFromRepository;
 
     @Autowired
-    public GetCurrenciesImpl(CurrencyList currencyList) {
-        this.currencyList = currencyList;
+    public GetCurrenciesImpl(CurrencyFromRepository currencyFromRepository) {
+        this.currencyFromRepository = currencyFromRepository;
     }
 
     @Override
@@ -30,6 +29,6 @@ public class GetCurrenciesImpl implements GetCurrencies {
 
     @Override
     public List<Currency> getAllCurrencies() {
-        return currencyList.getCurrencyRates();
+        return currencyFromRepository.getCurrencyRates();
     }
 }
