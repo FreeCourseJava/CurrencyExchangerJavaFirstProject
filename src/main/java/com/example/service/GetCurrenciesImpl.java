@@ -17,7 +17,7 @@ public class GetCurrenciesImpl implements GetCurrencies {
     }
 
     @Override
-    public Currency getCurrencies(String abrev) {
+    public Currency getCurrency(String abrev) {
         List<Currency> listCurrencies = getAllCurrencies();
         for (Currency currCurrency : listCurrencies) {
             if (currCurrency.getCurrencyAbbreviation().equals(abrev)) {

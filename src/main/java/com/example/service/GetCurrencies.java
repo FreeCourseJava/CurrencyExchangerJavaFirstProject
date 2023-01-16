@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public interface GetCurrencies {
-    Currency getCurrencies(String abrev);
+    Currency getCurrency(String abrev);
 
     List<Currency> getAllCurrencies();
 

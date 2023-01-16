@@ -22,6 +22,12 @@ public class Currency {
         this.currencyAbbreviation = currencyAbbreviation;
     }
 
+    @Override
+    public String toString() {
+        return "Курс " +currencyDenomination+" "+name+" ("
+                + currencyAbbreviation +") составляет " +currencyRate+" рублей";
+    }
+
     public String getName() {
         return name;
     }
